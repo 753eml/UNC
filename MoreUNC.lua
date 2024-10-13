@@ -255,7 +255,6 @@ local ConsoleQueue = Queue.new()
 local getgenv = getgenv or getfenv(2)
 getgenv().getgenv = getgenv
 local Sandbox = loadstring(game:HttpGet("https://pastebin.com/raw/a0cuADU4"))()
-funcs.string.dump = loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Function-Dumper-14820"))()
 funcs.dumpstring = funcs.string.dump
 funcs.compareinstances = function(a, b)
  if not clonerefs[a] then
