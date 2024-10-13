@@ -12,4 +12,6 @@
 
 ### 13/10/2024 21:12:00 (Script Update) - Hopefully fixed base 64 attempting to index nil.
 
+### 13/10/2024 22:15:40 (Script Update) - Removed broken functions.
+
 ### [https://753eml.github.io](https://753eml.github.io) for other info/stuff!
