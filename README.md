@@ -14,4 +14,6 @@
 
 ### 13/10/2024 22:15:40 (Script Update) - Removed broken functions.
 
+### 13/10/2024 23:18:45 (Script Update) - Hopefully removed another broken function.
+
 ### [https://753eml.github.io](https://753eml.github.io) for other info/stuff!
