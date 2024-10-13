@@ -8,6 +8,8 @@
 
 ### Changelogs:
 
-### 13/10/2024 18:06:00 (Website and Script) Released!
+### 13/10/2024 18:06:00 (Website and Script) - Released!
+
+### 13/10/2024 21:12:00 (Script Update) - Hopefully fixed base 64 attempting to index nil.
 
 ### [https://753eml.github.io](https://753eml.github.io) for other info/stuff!
