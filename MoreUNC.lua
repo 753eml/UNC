@@ -250,7 +250,6 @@ end
 function Queue:Current()
     return self.elements
 end
-funcs.base64 = {}
 funcs.syn = {}
 funcs.syn_backup = {}
 funcs.http = {}
