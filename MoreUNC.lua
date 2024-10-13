@@ -250,12 +250,6 @@ end
 function Queue:Current()
     return self.elements
 end
-funcs.syn = {}
-funcs.syn_backup = {}
-funcs.http = {}
-funcs.cache = {}
-funcs.string = string
-funcs.debug = debug
 local ClipboardQueue = Queue.new()
 local ConsoleQueue = Queue.new()
 local getgenv = getgenv or getfenv(2)
