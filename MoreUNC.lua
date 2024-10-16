@@ -56,6 +56,15 @@ getgenv().customprint = function(text: string, properties: table, imageId: rbxas
          msg.Parent.image.Image = imageId 
     end
 end
+getgenv().getsenv = function(script)
+    if environments[script] then
+        return environments[script]
+    end
+    local env = {}
+    setmetatable(env, {__index = getfenv()})
+    environments[script] = env
+    return env
+end
 getgenv().getdevice = function()
     local inputsrv = game:GetService("UserInputService")
     if inputsrv:GetPlatform() == Enum.Platform.Windows then
@@ -164,8 +173,8 @@ local oldGame = game
 local Version = '1.1.6'
 local Data = game:GetService("TeleportService"):GetLocalPlayerTeleportData()
 local TeleportData
-if Data and Data.MOREUNCSCRIPTQUEUE then
- TeleportData = Data.MOREUNCSCRIPTQUEUE
+if Data and Data.MOREUNCQUEUE then
+ TeleportData = Data.MOREUNCQUEUE
 end
 if TeleportData then
  local func = loadstring(TeleportData)
@@ -202,7 +211,7 @@ for _, API_Class in pairs(HttpService:JSONDecode(API_Dump).Classes) do
             local Special
 
             if MemberTags then
-                Special = table.find(MemberTags, "NotScriptable")
+                Special = table.find(MemberTags, "Notable")
             end
             if Special then
                 table.insert(Hidden, PropertyName)
@@ -472,7 +481,7 @@ funcs.syn.crypto = funcs.crypt
 funcs.syn_backup = funcs.syn
 funcs.http_request = getgenv().request or funcs.request
 funcs.getmodules = function()
- local a = {};for i, v in pairs(game:GetDescendants()) do if v:IsA("ModuleScript") then table.insert(a, v) end end return a
+ local a = {};for i, v in pairs(game:GetDescendants()) do if v:IsA("Module") then table.insert(a, v) end end return a
 end
 funcs.setsimulationradius = function(Distance, MaxDistance)
  local LocalPlayer = game:GetService("Players").LocalPlayer
@@ -515,12 +524,12 @@ funcs.firetouchinterest = function(toTouch, TouchWith, on)
 end
 funcs.getthreadidentity = funcs.getthreadcontext
 funcs.getidentity = funcs.getthreadcontext
-funcs.queue_on_teleport = function(scripttoexec)
+funcs.queue_on_teleport = function(toexec)
  local newTPService = {
   __index = function(self, key)
    if key == 'Teleport' then
     return function(gameId, player, teleportData, loadScreen)
-      teleportData = {teleportData, MOREUNCSCRIPTQUEUE=scripttoexec}
+      teleportData = {teleportData, MOREUNCQUEUE=toexec}
       return oldGame:GetService("TeleportService"):Teleport(gameId, player, teleportData, loadScreen)
     end
    end
