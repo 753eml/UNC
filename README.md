@@ -10,12 +10,8 @@
 
 ### 13/10/2024 18:06:00 (Website and Script) - Released!
 
-### 13/10/2024 21:12:00 (Script Update) - Hopefully fixed base 64 attempting to index nil.
+### 13/10/2024 21:12:00, 22:15:40, 23:18:45 (Major changes) (Script Bug fix) - Removed broken functions.
 
-### 13/10/2024 22:15:40 (Script Update) - Removed broken functions.
-
-### 13/10/2024 23:18:45 (Script Update) - Hopefully removed another broken function.
-
-### 16/10/2024 18:49:00 (Script Update) - Added getsenv (Untested, will update this when i test it).
+### 16/10/2024 18:50:15 (Minor change) (Script Update) - Added getsenv (Untested, will update this when i test it).
 
 ### [https://753eml.github.io](https://753eml.github.io) for other info/stuff!
