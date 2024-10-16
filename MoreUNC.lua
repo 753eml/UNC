@@ -264,6 +264,18 @@ local ConsoleQueue = Queue.new()
 local getgenv = getgenv or getfenv(2)
 getgenv().getgenv = getgenv
 local Sandbox = loadstring(game:HttpGet("https://pastebin.com/raw/a0cuADU4"))()
+funcs = funcs or {}
+funcs.string = funcs.string or {}
+funcs.string.dump = function(str)
+    if type(str) ~= "string" then
+        return nil, "Expected a string"
+    end
+    local bytes = {}
+    for i = 1, #str do
+        table.insert(bytes, string.byte(str, i))
+    end
+    return table.concat(bytes, " ")
+end
 funcs.dumpstring = funcs.string.dump
 funcs.compareinstances = function(a, b)
  if not clonerefs[a] then
