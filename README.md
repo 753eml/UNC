@@ -10,14 +10,6 @@
 
 ### 13/10/2024 18:06:00 (Website and Script) - Released! (MoreUNC, UNC check)
 
-### 13/10/2024 21:12:00, 22:15:40, 23:18:45 (Major changes) (Script Bug fix) - Removed broken functions. (MoreUNC)
-
-### 16/10/2024 18:50:15 (Minor change) (Script Update) - Added getsenv to MoreUNC (Currently broken).
-
-### 18/10/2024 17:44:25 (Minor change) (Script Bug fix) - Too many errors to add to last list. (MoreUNC)
-
-### 18/10/2024 18:26:15 (Minor change) (Script Bug fix) - Possible: Crashing issues were ThreadIdentities and runanimation functions breaking. (MoreUNC)
-
-### 18/10/2024 18:34:40 (Minor change) (Script Update, Bug fix) - Removed runanimation as Solara already had it. (MoreUNC)
+### 18/10/2024 18:43:45 (Script Update) - Reverted back to V1 version. (MoreUNC)
 
 ### [https://753eml.github.io](https://753eml.github.io) for other info/stuff!
