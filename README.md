@@ -14,6 +14,6 @@
 
 ### 18/10/2024 19:00:00 (Minor change) (Script Update) - Attempted to fix iscached function. (MoreUNC)
 
-### 18/10/2024 20:16:00 (Major change) (Script Update) - Hopefully fixed big portion of script. (MoreUNC)
+### 18/10/2024 20:16:15 (Major change) (Script Update/Bug fix) - Hopefully fixed big portion of script. (MoreUNC)
 
 ### [https://753eml.github.io](https://753eml.github.io) for other info/stuff!
