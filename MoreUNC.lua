@@ -160,6 +160,18 @@ getgenv().cache.replace = function(oldpart, newpart)
     end
     cachedshit[newpart] = true
 end
+getgenv().threadIdentities = {}
+getgenv().setThreadIdentity = function(identity)
+    if not identity then
+        error("Identity cannot be nil")
+    end
+    local index = #getgenv().threadIdentities + 1
+    getgenv().threadIdentities[index] = identity
+    warn("Set Thread Identity at index " .. index .. " to: " .. identity)
+end
+getgenv().getThreadIdentity = function(index)
+    return getgenv().threadIdentities[index] or nil
+end
 game.DescendantAdded:Connect(function(descendant)
     cachedshit[descendant] = true
 end)
