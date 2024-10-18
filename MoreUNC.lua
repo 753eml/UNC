@@ -1,5 +1,6 @@
--- Credits to SaladUNC and MoreUNC, respectively.
+-- Credits to SaladUNC, MoreUNC, Script-Ware respectively.
 local objs = {}
+local threadIdentities = {}
 local httpserv = game:GetService("HttpService")
 local function trackobj(obj)
     table.insert(objs, obj)
@@ -55,15 +56,6 @@ getgenv().customprint = function(text: string, properties: table, imageId: rbxas
          msg.Parent.image.Image = imageId 
     end
 end
-getgenv().getsenv = function(script)
-    if environments[script] then
-        return environments[script]
-    end
-    local env = {}
-    setmetatable(env, {__index = getfenv()})
-    environments[script] = env
-    return env
-end
 getgenv().getdevice = function()
     local inputsrv = game:GetService("UserInputService")
     if inputsrv:GetPlatform() == Enum.Platform.Windows then
@@ -80,8 +72,14 @@ getgenv().getdevice = function()
         return 'Unknown'
     end
 end
-getgenv().cache = getgenv().cache or {}
-local cache = getgenv().cache
+getgenv().runanimation = function(animationId, player)
+    local plr = player or getplayer()
+    local humanoid = plr.Character:FindFirstChildOfClass("Humanoid")
+    if humanoid then
+        local animation = Instance.new("Animation")
+        animation.AnimationId = "rbxassetid://" .. tostring(animationId)
+        humanoid:LoadAnimation(animation):Play()
+    end
 end
 getgenv().getping = function(suffix: boolean)
     local rawping = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString()
@@ -124,6 +122,7 @@ end
 getgenv().firetouchtransmitter = firetouchinterest
 getgenv().getplatform = getdevice
 getgenv().getos = getdevice
+getgenv().playanimation = runanimation
 getgenv().cache = {}
 getgenv().cachedshit = {}
 getgenv().cache.invalidate = function(part)
@@ -136,26 +135,13 @@ getgenv().cache.iscached = function(part)
     if not part then
         return false
     end
-    return true
+    return cachedshit[part] ~= nil
 end
 getgenv().cache.replace = function(oldpart, newpart)
     if cachedshit[oldpart] then
         cachedshit[oldpart] = nil
     end
     cachedshit[newpart] = true
-end
-getgenv().threadIdentities = getgenv().threadIdentities or {}
-local threadIdentities = getgenv().threadIdentities
-getgenv().setThreadIdentity = function(identity)
-    if not identity then
-        error("Identity cannot be nil")
-    end
-    local index = #getgenv().threadIdentities + 1
-    getgenv().threadIdentities[index] = identity
-    warn("Set Thread Identity at index " .. index .. " to: " .. identity)
-end
-getgenv().getThreadIdentity = function(index)
-    return getgenv().threadIdentities[index] or nil
 end
 game.DescendantAdded:Connect(function(descendant)
     cachedshit[descendant] = true
@@ -209,11 +195,8 @@ for _, API_Class in pairs(HttpService:JSONDecode(API_Dump).Classes) do
     for _, Member in pairs(API_Class.Members) do
         if Member.MemberType == "Property" then
             local PropertyName = Member.Name
-
             local MemberTags = Member.Tags
-
             local Special
-
             if MemberTags then
                 Special = table.find(MemberTags, "NotScriptable")
             end
@@ -263,23 +246,19 @@ end
 function Queue:Current()
     return self.elements
 end
+funcs.base64 = {}
+funcs.syn = {}
+funcs.syn_backup = {}
+funcs.http = {}
+funcs.cache = {}
+funcs.string = string
+funcs.debug = debug
 local ClipboardQueue = Queue.new()
 local ConsoleQueue = Queue.new()
 local getgenv = getgenv or getfenv(2)
 getgenv().getgenv = getgenv
 local Sandbox = loadstring(game:HttpGet("https://pastebin.com/raw/a0cuADU4"))()
-funcs = funcs or {}
-funcs.string = funcs.string or {}
-funcs.string.dump = function(str)
-    if type(str) ~= "string" then
-        return nil, "Expected a string"
-    end
-    local bytes = {}
-    for i = 1, #str do
-        table.insert(bytes, string.byte(str, i))
-    end
-    return table.concat(bytes, " ")
-end
+funcs.string.dump = loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Function-Dumper-14820"))()
 funcs.dumpstring = funcs.string.dump
 funcs.compareinstances = function(a, b)
  if not clonerefs[a] then
@@ -289,9 +268,8 @@ funcs.compareinstances = function(a, b)
  end
  return false
 end
-funcs.cache = funcs.cache or {}
 funcs.cache.iscached = function(thing)
-    return cache[thing] ~= 'REMOVE' and thing:IsDescendantOf(game) or false
+ return cache[thing] ~= 'REMOVE' and thing:IsDescendantOf(game) or false
 end
 funcs.cache.invalidate = function(thing)
  cache[thing] = 'REMOVE'
@@ -509,9 +487,8 @@ funcs.setsimulationradius = function(Distance, MaxDistance)
   LocalPlayer.MaxSimulationDistance = MaxDistance
  end
 end
-local Instances = {}
 funcs.getnilinstances = function()
-    return type(Instances) == "table" and Instances or {}
+ return Instances
 end
 funcs.iswriteable = function(tbl)
  return not table.isfrozen(tbl)
