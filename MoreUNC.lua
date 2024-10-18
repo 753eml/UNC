@@ -185,6 +185,26 @@ getgenv().cache.replace = function(oldpart, newpart)
     end
     cachedshit[newpart] = true
 end
+local function hookmetamethod(class, methodName, newFunction)
+    local metatable = getmetatable(class)
+    if not metatable then return end
+    local originalMethod = metatable[methodName]
+    metatable[methodName] = function(...)
+        print("Hooked method called: " .. methodName)
+        return newFunction(originalMethod, ...)
+    end
+end
+local exampleTable = {}
+setmetatable(exampleTable, {
+    __index = function(t, k)
+        return "You accessed key: " .. tostring(k)
+    end
+})
+hookmetamethod(exampleTable, "__index", function(originalMethod, ...)
+    local key = ...
+    warn("Custom behavior before accessing key:", key)
+    return originalMethod(...)
+end)
 game.DescendantAdded:Connect(function(descendant)
     cachedshit[descendant] = true
 end)
