@@ -185,7 +185,8 @@ getgenv().cache.replace = function(oldpart, newpart)
     end
     cachedshit[newpart] = true
 end
-local function hookmetamethod(class, methodName, newFunction)
+local funcs = {}
+funcs.hookmetamethod = function(class, methodName, newFunction)
     local metatable = getmetatable(class)
     if not metatable then return end
     local originalMethod = metatable[methodName]
@@ -200,7 +201,7 @@ setmetatable(exampleTable, {
         return "You accessed key: " .. tostring(k)
     end
 })
-hookmetamethod(exampleTable, "__index", function(originalMethod, ...)
+funcs.hookmetamethod(exampleTable, "__index", function(originalMethod, ...)
     local key = ...
     warn("Custom behavior before accessing key:", key)
     return originalMethod(...)
@@ -649,4 +650,9 @@ funcs.getthreadcontext = function()
 			return tonumber(Identity)
 		end
 	end
+end
+funcs.hookFunction = function(originalFunction, newFunction)
+    return function(...)
+        return newFunction(originalFunction, ...)
+    end
 end
