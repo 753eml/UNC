@@ -1,6 +1,5 @@
 -- Credits to SaladUNC and MoreUNC, respectively.
 local objs = {}
-local threadIdentities = {}
 local httpserv = game:GetService("HttpService")
 local function trackobj(obj)
     table.insert(objs, obj)
