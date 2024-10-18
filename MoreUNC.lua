@@ -84,21 +84,6 @@ end
 getgenv().cache = getgenv().cache or {}
 local cache = getgenv().cache
 end
-getgenv().runanimation = function(animationId, player)
-    if not table.find(cache, animationId) then
-        warn("Animation ID not found in cache.")
-        return
-    end
-end
-    local plr = player or game.Players.LocalPlayer
-    local humanoid = plr.Character and plr.Character:FindFirstChildOfClass("Humanoid")
-    if humanoid then
-        local animation = Instance.new("Animation")
-        animation.AnimationId = "rbxassetid://" .. tostring(animationId)
-        local animTrack = humanoid:LoadAnimation(animation)
-        animTrack:Play()
-    end
-end
 getgenv().getping = function(suffix: boolean)
     local rawping = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString()
     local pingstr = rawping:sub(1,#rawping-7)
@@ -140,7 +125,6 @@ end
 getgenv().firetouchtransmitter = firetouchinterest
 getgenv().getplatform = getdevice
 getgenv().getos = getdevice
-getgenv().playanimation = runanimation
 getgenv().cache = {}
 getgenv().cachedshit = {}
 getgenv().cache.invalidate = function(part)
