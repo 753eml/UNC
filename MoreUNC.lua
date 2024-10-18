@@ -88,7 +88,8 @@ getgenv().runanimation = function(animationId, player)
     if not table.find(cache, animationId) then
         warn("Animation ID not found in cache.")
         return
-    end 
+    end
+end
     local plr = player or game.Players.LocalPlayer
     local humanoid = plr.Character and plr.Character:FindFirstChildOfClass("Humanoid")
     if humanoid then
@@ -160,7 +161,8 @@ getgenv().cache.replace = function(oldpart, newpart)
     end
     cachedshit[newpart] = true
 end
-getgenv().threadIdentities = {}
+getgenv().threadIdentities = getgenv().threadIdentities or {}
+local threadIdentities = getgenv().threadIdentities
 getgenv().setThreadIdentity = function(identity)
     if not identity then
         error("Identity cannot be nil")
