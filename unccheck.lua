@@ -1,3 +1,4 @@
+-- All the same as Script-Ware's
 local passes, fails, undefined = 0, 0, 0
 local running = 0
 
