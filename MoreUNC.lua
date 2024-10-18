@@ -246,6 +246,7 @@ end
 function Queue:Current()
     return self.elements
 end
+funcs = funcs or {}
 funcs.base64 = {}
 funcs.syn = {}
 funcs.syn_backup = {}
@@ -269,7 +270,7 @@ funcs.compareinstances = function(a, b)
  return false
 end
 funcs.cache.iscached = function(thing)
-	return cache[thing] ~= 'REMOVE' and thing:IsDescendantOf(game) or false
+    return cache[thing] ~= 'REMOVE' and thing:IsDescendantOf(game) or false
 end
 funcs.cache.invalidate = function(thing)
  cache[thing] = 'REMOVE'
