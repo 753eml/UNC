@@ -14,6 +14,6 @@
 
 ### 16/10/2024 18:50:15 (Minor change) (Script Update) - Added getsenv (Untested, will update this when i test it).
 
-### 16/10/2024 19:02:15 (Minor change) (Script Bug fix) - Attempted to fix a function.
+### 16/10/2024 19:02:15; 18/10/2024 17:17:40 (Minor change) (Script Bug fix) - Attempted to fix functions.
 
 ### [https://753eml.github.io](https://753eml.github.io) for other info/stuff!
