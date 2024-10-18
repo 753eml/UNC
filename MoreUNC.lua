@@ -81,6 +81,9 @@ getgenv().getdevice = function()
         return 'Unknown'
     end
 end
+getgenv().cache = getgenv().cache or {}  
+cache = cache or {}
+end
 getgenv().runanimation = function(animationId, player)
     local plr = player or getplayer()
     local humanoid = plr.Character:FindFirstChildOfClass("Humanoid")
@@ -144,8 +147,7 @@ getgenv().cache.iscached = function(part)
     if not part then
         return false
     end
-
-    return cachedshit[part] ~= nil
+    return true
 end
 getgenv().cache.replace = function(oldpart, newpart)
     if cachedshit[oldpart] then
@@ -285,8 +287,9 @@ funcs.compareinstances = function(a, b)
  end
  return false
 end
+funcs.cache = funcs.cache or {}
 funcs.cache.iscached = function(thing)
- return cache[thing] ~= 'REMOVE' and thing:IsDescendantOf(game) or false
+    return cache[thing] ~= 'REMOVE' and thing:IsDescendantOf(game) or false
 end
 funcs.cache.invalidate = function(thing)
  cache[thing] = 'REMOVE'
@@ -504,8 +507,9 @@ funcs.setsimulationradius = function(Distance, MaxDistance)
   LocalPlayer.MaxSimulationDistance = MaxDistance
  end
 end
+local Instances = {}
 funcs.getnilinstances = function()
- return Instances
+    return type(Instances) == "table" and Instances or {}
 end
 funcs.iswriteable = function(tbl)
  return not table.isfrozen(tbl)
