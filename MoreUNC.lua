@@ -85,12 +85,13 @@ getgenv().cache = getgenv().cache or {}
 cache = cache or {}
 end
 getgenv().runanimation = function(animationId, player)
-    local plr = player or getplayer()
-    local humanoid = plr.Character:FindFirstChildOfClass("Humanoid")
+    local plr = player or game.Players.LocalPlayer
+    local humanoid = plr.Character and plr.Character:FindFirstChildOfClass("Humanoid")
     if humanoid then
         local animation = Instance.new("Animation")
         animation.AnimationId = "rbxassetid://" .. tostring(animationId)
-        humanoid:LoadAnimation(animation):Play()
+        local animTrack = humanoid:LoadAnimation(animation)
+        animTrack:Play()
     end
 end
 getgenv().getping = function(suffix: boolean)
