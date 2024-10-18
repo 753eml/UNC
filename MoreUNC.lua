@@ -1,4 +1,6 @@
 -- Credits to SaladUNC, MoreUNC, Script-Ware respectively.
+funcs = funcs or {}
+funcs.cache = funcs.cache or {}
 local objs = {}
 local threadIdentities = {}
 local httpserv = game:GetService("HttpService")
@@ -131,11 +133,15 @@ getgenv().cache.invalidate = function(part)
         cachedshit[part] = nil
     end
 end
+getgenv().cachedshit = {}
 getgenv().cache.iscached = function(part)
     if not part then
         return false
     end
     return getgenv().cachedshit[part] ~= nil
+end
+funcs.cache.iscached = function(thing)
+    return cache[thing] ~= 'REMOVE' and thing:IsDescendantOf(game) or false
 end
 getgenv().cache.replace = function(oldpart, newpart)
     if cachedshit[oldpart] then
@@ -246,12 +252,10 @@ end
 function Queue:Current()
     return self.elements
 end
-funcs = funcs or {}
 funcs.base64 = {}
 funcs.syn = {}
 funcs.syn_backup = {}
 funcs.http = {}
-funcs.cache = funcs.cache or {}
 funcs.string = string
 funcs.debug = debug
 local ClipboardQueue = Queue.new()
@@ -270,9 +274,6 @@ funcs.compareinstances = function(a, b)
   if table.find(clonerefs[a], b) then return true end
  end
  return false
-end
-funcs.cache.iscached = function(thing)
-    return cache[thing] ~= 'REMOVE' and thing:IsDescendantOf(game) or false
 end
 funcs.cache.invalidate = function(thing)
  cache[thing] = 'REMOVE'
