@@ -58,6 +58,42 @@ getgenv().customprint = function(text: string, properties: table, imageId: rbxas
          msg.Parent.image.Image = imageId 
     end
 end
+getgenv().getconstant = function(func, index)
+    if type(func) ~= "function" then
+        error("First argument must be a function.")
+    end
+    local constants = {}
+    local info = debug.getinfo(func)
+    if not info or not info.func then
+        error("Unable to retrieve function information.")
+    end
+    for i = 1, math.huge do
+        local constant = debug.getconstant(func, i)
+        if constant == nil then
+            break
+        end
+        constants[i] = constant
+    end
+    return constants[index] or nil
+end
+getgenv().getconstants = function(func)
+    if type(func) ~= "function" then
+        error("Argument must be a function.")
+    end
+    local constants = {}
+    local info = debug.getinfo(func)
+    if not info or not info.func then
+        error("Unable to retrieve function information.")
+    end
+    for i = 1, math.huge do
+        local constant = debug.getconstant(func, i)
+        if constant == nil then
+            break
+        end
+        table.insert(constants, constant)
+    end
+    return constants
+end
 getgenv().getdevice = function()
     local inputsrv = game:GetService("UserInputService")
     if inputsrv:GetPlatform() == Enum.Platform.Windows then
