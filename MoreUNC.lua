@@ -81,10 +81,14 @@ getgenv().getdevice = function()
         return 'Unknown'
     end
 end
-getgenv().cache = getgenv().cache or {}  
-cache = cache or {}
+getgenv().cache = getgenv().cache or {}
+local cache = getgenv().cache
 end
 getgenv().runanimation = function(animationId, player)
+    if not table.find(cache, animationId) then
+        warn("Animation ID not found in cache.")
+        return
+    end 
     local plr = player or game.Players.LocalPlayer
     local humanoid = plr.Character and plr.Character:FindFirstChildOfClass("Humanoid")
     if humanoid then
