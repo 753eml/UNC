@@ -14,8 +14,8 @@
 
 ### 16/10/2024 18:50:15 (Minor change) (Script Update) - Added getsenv to MoreUNC (Currently broken).
 
-### 16/10/2024 19:02:15; 18/10/2024 17:17:40; 17:22:45; 17:28:15 (Minor change) (Script Bug fix) - Attempted to fix functions in MoreUNC.
-
 ### 18/10/2024 17:44:25 (Minor change) (Script Bug fix) - Too many errors to add to last list (MoreUNC).
+
+### 18/10/2024 18:15:40 (Minor change) (Script Bug fix) - Maybe found the cause and finally fixed MoreUNC (previous update removing some letters off crucial functions).
 
 ### [https://753eml.github.io](https://753eml.github.io) for other info/stuff!
