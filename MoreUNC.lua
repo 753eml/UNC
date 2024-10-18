@@ -547,25 +547,37 @@ funcs.queue_on_teleport = function(scripttoexec)
  getgenv().game = setmetatable({}, gameMeta)
 end
 funcs.queueonteleport = funcs.queue_on_teleport
+local function SafeOverride(name, value)
+    if not value then 
+        return nil
+    end
+    return 2
+end
 local Count = 0
 local Total = 0
 local funcs2 = {}
 for i, _ in pairs(funcs) do
- table.insert(funcs2, i)
+    table.insert(funcs2, i)
 end
 table.sort(funcs2, function(a, b)
- return string.byte(a:lower())<string.byte(b:lower())
+    return string.byte(a:lower()) < string.byte(b:lower())
 end)
-for i, v in pairs(funcs2) do
- if not getgenv()[i] then
-  Total = Total + 1
- end
+for _, i in pairs(funcs2) do
+    if not getgenv()[i] then
+        Total = Total + 1
+    end
 end
 for _, i in pairs(funcs2) do
- local v = funcs[i]
- local Result = SafeOverride(i, v)
- if Result == 2 then Count = Count + 1 end
- local str = Result == 1 and ('[⛔] %s already exists.'):format(i) or Result == 2 and ("[✅] Added %s%s to the global environment. (%d/%d)"):format(i, type(v)=='function' and '()' or '', Count, Total) or Result ~= 1 and Result ~= 2 and ("[⛔] Unknown result for %s."):format(i)
+    local v = funcs[i]
+    if v then 
+        local Result = SafeOverride(i, v)
+        if Result == 2 then 
+            Count = Count + 1 
+        end
+        local str = Result == 1 and ('[⛔] %s already exists.'):format(i) or 
+                    Result == 2 and ("[✅] Added %s%s to the global environment. (%d/%d)"):format(i, type(v)=='function' and '()' or '', Count, Total) or 
+                    ("[⛔] Unknown result for %s."):format(i)
+    end
 end
 funcs.getthreadcontext = function()
 	if coroutine.isyieldable(coroutine.running()) then
