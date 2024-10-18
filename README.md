@@ -16,6 +16,6 @@
 
 ### 18/10/2024 17:44:25 (Minor change) (Script Bug fix) - Too many errors to add to last list (MoreUNC).
 
-### 18/10/2024 18:26:15 (Minor change) (Script Bug fix) - I think the crashing issue was ThreadIdentities and runanimation function breaking.
+### 18/10/2024 18:26:15 (Minor change) (Script Bug fix) - Possible: Crashing issues were ThreadIdentities and runanimation functions breaking.
 
 ### [https://753eml.github.io](https://753eml.github.io) for other info/stuff!
