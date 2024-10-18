@@ -124,7 +124,7 @@ getgenv().getplatform = getdevice
 getgenv().getos = getdevice
 getgenv().playanimation = runanimation
 getgenv().cache = {}
-getgenv().cachedshit = {}
+getgenv().cachedshit = getgenv().cachedshit or {}
 getgenv().cache.invalidate = function(part)
     if part then
         part:Destroy()
@@ -135,7 +135,7 @@ getgenv().cache.iscached = function(part)
     if not part then
         return false
     end
-    return cachedshit[part] ~= nil
+    return getgenv().cachedshit[part] ~= nil
 end
 getgenv().cache.replace = function(oldpart, newpart)
     if cachedshit[oldpart] then
@@ -269,7 +269,7 @@ funcs.compareinstances = function(a, b)
  return false
 end
 funcs.cache.iscached = function(thing)
- return cache[thing] ~= 'REMOVE' and thing:IsDescendantOf(game) or false
+	return cache[thing] ~= 'REMOVE' and thing:IsDescendantOf(game) or false
 end
 funcs.cache.invalidate = function(thing)
  cache[thing] = 'REMOVE'
