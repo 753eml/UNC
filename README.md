@@ -18,6 +18,4 @@
 
 ### 18/10/2024 20:53:45 (Minor change) (Script Update) (MoreUNC) - Added debug.getconstant(s) functions.
 
-### 18/10/2024 21:07:00 (Minor change) (Script Update) (MoreUNC) - Potentially added a working hookmetamethod and hookfunction (Recently added functions by me may not work in UNC test).
-
 ### [https://753eml.github.io](https://753eml.github.io) for other info/stuff!
