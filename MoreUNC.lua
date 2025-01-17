@@ -289,6 +289,33 @@ end
 function Queue:Current()
     return self.elements
 end
+function funcs.hookmetamethod(object, metamethod, func)
+    local mt = getmetatable(object)
+    if not mt then
+        error("Object has no metatable!")
+    end
+
+    local original = mt[metamethod]
+    if original then
+        mt[metamethod] = function(...)
+            func(...)
+            return original(...)
+        end
+    else
+        mt[metamethod] = func
+    end
+end
+local funcs.hookfunction(funcName, func)
+    local original = _G[funcName]
+    if original then
+        _G[funcName] = function(...)
+            func(...)
+            return original(...)
+        end
+    else
+        _G[funcName] = func
+    end
+end
 funcs.base64 = {}
 funcs.syn = {}
 funcs.syn_backup = {}
