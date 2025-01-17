@@ -305,7 +305,7 @@ function funcs.hookmetamethod(object, metamethod, func)
         mt[metamethod] = func
     end
 end
-local funcs.hookfunction(funcName, func)
+function funcs.hookfunction(funcName, func)
     local original = _G[funcName]
     if original then
         _G[funcName] = function(...)
