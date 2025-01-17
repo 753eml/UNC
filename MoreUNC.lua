@@ -1,4 +1,3 @@
--- Credits to SaladUNC, MoreUNC, Script-Ware respectively.
 funcs = funcs or {}
 funcs.cache = funcs.cache or {}
 local objs = {}
@@ -142,9 +141,6 @@ getgenv().getplayers = function()
 end
 getgenv().getplayer = function(name: string)
     return not name and getplayers()["LocalPlayer"] or getplayers()[name]
-end
-getgenv().getaffiliateid = function()
-  return "salad-aff0"
 end
 getgenv().getlocalplayer = function()
     return getplayer()
@@ -338,19 +334,6 @@ funcs.compareinstances = function(a, b)
   if table.find(clonerefs[a], b) then return true end
  end
  return false
-end
-funcs.cache.invalidate = function(thing)
- cache[thing] = 'REMOVE'
- thing.Parent = nil
-end
-funcs.cache.replace = function(a, b)
- if cache[a] then
-  cache[a] = b
- end
- local n, p = a.Name, a.Parent
- b.Parent = p
- b.Name = n
- a.Parent = nil
 end
 funcs.deepclone = function(a)
  local Result = {}
